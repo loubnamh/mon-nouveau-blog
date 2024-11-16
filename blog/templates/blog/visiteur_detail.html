@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-header">
+    <h1>
+        <a href="/">{{visiteur.id_visiteur}}</a>
+    </h1>
+    <img src="{{ visiteur.photo }}" alt="Photo de {{ visiteur.nom }}">
+    <h3><a href="{% url 'visiteur_detail' id_visiteur=visiteur.id_visiteur %}">{{ visiteur.nom }}</a></h3>
+    <p><strong>État :</strong> {{ visiteur.etat }}</p>
+    <p><strong>Attraction Actuelle :</strong> {{ visiteur.attraction.nom }}</p>
+    <form method="POST" class="post-form">{% csrf_token %}
+        <b> Changer : </b> {{ form.as_ul }}
+        <button type="submit" class="btn btn-outline-light">OK</button>
+        <a href="{% url 'post_list' %}">Back</a>
+    </form>
+</div>
+{% if message != '' %}
+<div class="alert alert-danger" role="alert">
+    {{ message }}
+</div>
+{% endif %}
+ 
+{% endblock %}

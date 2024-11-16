@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+                <h1>Liste des Visiteurs</h1>
+                {% for visiteur in Visiteurs %}
+                    <div class="card">
+                        <img src="{{ visiteur.photo }}" alt="Photo de {{ visiteur.nom }}">
+                        <h3><a href="{% url 'visiteur_detail' id_visiteur=visiteur.id_visiteur %}">{{ visiteur.nom }}</a></h3>
+                        <p><strong>État :</strong> {{ visiteur.etat }}</p>
+                        <p><strong>Attraction Actuelle :</strong> {{ visiteur.attraction.nom }}</p>
+                        
+                    </div>
+                {% endfor %}
+           
+        
+                <h1>Liste des Attractions</h1>
+
+                {% for attraction in Attractions %}
+                    <div class="card">
+                        <img src="{{ attraction.photo }}" alt="Photo de {{ attraction.nom }}">
+                        <h3>{{ attraction.nom }}</h3>
+                        <p><strong>État :</strong> {{ attraction.etat }}</p>
+                        <p><strong>Capacité Max :</strong> {{ attraction.capacitemaximal }}</p>
+                        <p><strong>Visiteurs Actuels :</strong> {{ attraction.nbractuelle }}</p>
+                    </div>
+                {% endfor %}
+            
+{% endblock %}            
