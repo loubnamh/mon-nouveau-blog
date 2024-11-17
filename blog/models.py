@@ -59,14 +59,10 @@ class visiteur(models.Model):
     def changer_etat(self, nouvel_etat, nouvelle_attraction):
 
         if nouvelle_attraction.est_disponible() and nouvelle_attraction.etat == "ouverte":
-        # Mettre à jour l'état du visiteur
             self.etat = nouvel_etat
-        # Retirer le visiteur de l'attraction actuelle
             if self.attraction:
                 self.attraction.retirer_visiteur()
-        # Affecter la nouvelle attraction au visiteur
                 self.attraction = nouvelle_attraction
-        # Ajouter le visiteur à la nouvelle attraction
                 nouvelle_attraction.ajouter_visiteur()
                 self.save() 
 
@@ -80,15 +76,15 @@ class visiteur(models.Model):
             "prêt": ("fatigué", "Attraction Intense"),
         }
     
-    # Vérifier si l'état actuel du visiteur permet une transition
+    
         if self.etat in transitions:
             nouvel_etat, nom_attraction = transitions[self.etat]
 
             try:
-            # Récupérer l'attraction correspondante
+            
                 nouvelle_attractionA = attraction.objects.get(nom=nom_attraction)
             except attraction.DoesNotExist:
-            # Si l'attraction n'existe pas, on retourne sans effectuer la transition
+            
                 print(f"L'attraction '{nom_attraction}' n'existe pas.")
                 return
          
@@ -96,9 +92,9 @@ class visiteur(models.Model):
             if nouvelle_attractionA.est_disponible() and nouvelle_attractionA.etat == "ouverte" and nouvelle_attraction.nom==nouvelle_attractionA.nom:
             
                 if self.etat == "fatigué" and nom_attraction == "Zones de Repos":
-                # On change l'état du visiteur
+               
                     self.etat = nouvel_etat
-                # Mise à jour de l'attraction du visiteur
+                
                     self.changer_etat(nouvel_etat, nouvelle_attraction)
                 elif self.etat == "affamé" and nom_attraction == "Zones de Restauration":
                
