@@ -16,7 +16,7 @@ class MoveForm(forms.ModelForm):
         }
     def save(self, commit=True):
         visiteur = super().save(commit=False)
-        visiteur.transition_etat()
+        visiteur.transition_etat(visiteur.attraction)
         if commit:
             visiteur.save()
         return visiteur

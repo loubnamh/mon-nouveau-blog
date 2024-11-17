@@ -5,6 +5,7 @@
     <h1>
         <a href="/">{{visiteur.id_visiteur}}</a>
     </h1>
+    <br>
     <img src="{{ visiteur.photo }}" alt="Photo de {{ visiteur.nom }}">
     <h3><a href="{% url 'visiteur_detail' id_visiteur=visiteur.id_visiteur %}">{{ visiteur.nom }}</a></h3>
     <p><strong>État :</strong> {{ visiteur.etat }}</p>
